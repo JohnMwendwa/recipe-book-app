@@ -125,8 +125,12 @@ export default function App() {
   };
 
   const filteredRecipes = recipes
-    .filter((recipe) =>
-      recipe.name.toLowerCase().includes(searchQuery.toLowerCase())
+    .filter(
+      (recipe) =>
+        recipe.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        recipe.ingredients.some((ingredient) =>
+          ingredient.toLowerCase().includes(searchQuery.toLowerCase())
+        )
     )
     .filter(
       (recipe) =>
