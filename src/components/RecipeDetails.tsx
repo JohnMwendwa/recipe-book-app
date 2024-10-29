@@ -14,10 +14,20 @@ import { Recipe } from "../types/Recipe";
 interface RecipeDetailsProps {
   recipe: Recipe | null;
   onClose: () => void;
+  onRemove: (recipe: Recipe) => void;
 }
 
-export default function RecipeDetails({ recipe, onClose }: RecipeDetailsProps) {
+export default function RecipeDetails({
+  recipe,
+  onClose,
+  onRemove,
+}: RecipeDetailsProps) {
   if (!recipe) return null;
+
+  const handleRemove = () => {
+    onRemove(recipe);
+    onClose();
+  };
 
   return (
     <Dialog open={!!recipe} onClose={onClose} maxWidth="md" fullWidth>
@@ -55,7 +65,12 @@ export default function RecipeDetails({ recipe, onClose }: RecipeDetailsProps) {
         </Typography>
         <Typography color="text.secondary">{recipe.instructions}</Typography>
       </DialogContent>
-      <DialogActions>
+      <DialogActions
+        sx={{ justifyContent: "space-between", marginInline: "16px" }}
+      >
+        <Button onClick={handleRemove} sx={{ color: "red" }}>
+          Remove
+        </Button>
         <Button onClick={onClose}>Close</Button>
       </DialogActions>
     </Dialog>
