@@ -31,14 +31,17 @@ export default function RecipeCard({
         flexDirection: "column",
         height: "100%",
         cursor: "pointer",
-        transition: "transform 0.2s",
-        "&:hover": { transform: "scale(1.02)" },
+        transition: "all 0.3s",
+        "&:hover": {
+          transform: "scale(1.02)",
+          backgroundColor: "rgba(0, 0, 255, 0.05)",
+        },
       }}
       onClick={() => onSelect(recipe)}
     >
       <CardMedia
         component="img"
-        height="140"
+        height="180"
         image={recipe.image}
         alt={recipe.name}
       />
