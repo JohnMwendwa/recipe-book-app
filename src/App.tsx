@@ -120,6 +120,10 @@ export default function App() {
     );
   };
 
+  const handleRemoveRecipe = (recipe: Recipe) => {
+    setRecipes(recipes.filter((r) => r.id !== recipe.id));
+  };
+
   const filteredRecipes = recipes
     .filter((recipe) =>
       recipe.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -160,7 +164,7 @@ export default function App() {
                   {filter === "favorites" ? (
                     <Favorite color="warning" sx={{ marginRight: "2px" }} />
                   ) : (
-                    <FavoriteBorderOutlinedIcon />
+                    <FavoriteBorderOutlinedIcon sx={{ marginRight: "2px" }} />
                   )}
                   Favorites
                 </ToggleButton>
@@ -198,6 +202,7 @@ export default function App() {
         <RecipeDetails
           recipe={selectedRecipe}
           onClose={() => setSelectedRecipe(null)}
+          onRemove={handleRemoveRecipe}
         />
       </Box>
     </ThemeProvider>
